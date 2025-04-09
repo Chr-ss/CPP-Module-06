@@ -6,7 +6,7 @@
 /*   By: christian.rasche <christian.rasche@stud      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/11/09 14:58:18 by christian.r   #+#    #+#                 */
-/*   Updated: 2025/04/09 20:19:19 by christian.r   ########   odam.nl         */
+/*   Updated: 2025/04/09 20:22:05 by christian.r   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@ ScalarConverter& ScalarConverter::operator=(const ScalarConverter &other) {
 
 bool	ifSpecial(const std::string &input) {
 	if (input == "-inf" || input == "+inf" || input == "nan") {
-		std::cout << "char: out-of-range" << std::endl;
-		std::cout << "int: out-of-range" << std::endl;
+		std::cout << "char: impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
 		std::cout << "float: " << input << "f" << std::endl;
 		std::cout << "double: " << input << std::endl;
 		return (true);
 	} else if (input == "-inff" || input == "+inff" || input == "nanf") {
 		std::string doubleInput = input.substr(0, input.length() - 1);
-		std::cout << "char: out-of-range" << std::endl;
-		std::cout << "int: out-of-range" << std::endl;
+		std::cout << "char: impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
 		std::cout << "float: " << input << std::endl;
 		std::cout << "double: " << input << std::endl;
 		return (true);
@@ -228,21 +228,21 @@ void ScalarConverter::convert(const std::string &input) {
 
 	std::cout << "char: ";
 	if (overflow[0]) {
-		std::cout << "out-of-range" << std::endl;
+		std::cout << "impossible" << std::endl;
 	} else if (std::isprint(c)) {
 		std::cout << "'" << c << "'" << std::endl;
 	} else {
-		std::cout << "non-displayable" << std::endl;
+		std::cout << "Non displayable" << std::endl;
 	}
 	std::cout << "int: ";
 	if (overflow[1]) {
-		std::cout << "out-of-range" << std::endl;
+		std::cout << "impossible" << std::endl;
 	} else {
 		std::cout << i << std::endl;
 	}
 	std::cout << "float: ";
 	if (overflow[2]) {
-		std::cout << "out-of-range" << std::endl;
+		std::cout << "impossible" << std::endl;
 	} else {
 		std::cout << std::fixed << std::setprecision(1) << f << "f" << std::endl;
 	}
