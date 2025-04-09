@@ -1,4 +1,4 @@
-NAME		=	bureaucrat
+NAME		=	converter
 RM			=	rm -rf
 CPP			=	c++
 CPPFLAGS	=	-Wall -Wextra -Werror -std=c++98

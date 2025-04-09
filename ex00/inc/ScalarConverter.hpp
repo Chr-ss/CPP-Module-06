@@ -6,7 +6,7 @@
 /*   By: christian.rasche <christian.rasche@stud      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/11/09 14:58:12 by christian.r   #+#    #+#                 */
-/*   Updated: 2025/01/18 17:22:02 by crasche       ########   odam.nl         */
+/*   Updated: 2025/04/08 19:24:29 by christian.r   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <cctype>
 # include <iostream>
+# include <iomanip>
 
 # define RESET          "\033[0m"
 # define BLACK          "\033[30m"
@@ -42,40 +43,20 @@
 # define BOLD           "\033[1m"
 # define UNDERLINE      "\033[4m"
 
+# define CHAR_TYPE		0
+# define INT_TYPE		1
+# define FLOAT_TYPE		2
+# define DOUBLE_TYPE	3
+# define INVALID_TYPE	4
+
 class ScalarConverter{
 private:
-	// Private variables
-	std::string _input;
-	int _int;
-	float _float;
-	double _double;
-	char _char;
-
-	// Private functions
-	void _convertToChar();
-	void _convertToInt();
-	void _convertToFloat();
-	void _convertToDouble();
-public:
-	// Constructor
-	ScalarConverter(std::string input);
-	// Destructor
+	ScalarConverter();
 	~ScalarConverter();
-	// Copy constructor
+public:
 	ScalarConverter(const ScalarConverter &toCopy);
-	// Copy assignment operator
 	ScalarConverter& operator=(const ScalarConverter &other);
-
-	// Public functions
-	void convert();
-	void print();
-
-	// Exceptions
-	class ImpossibleException : public std::exception{
-		virtual const char* what() const throw(){
-			return "impossible";
-		}
-	};
+	static void convert(const std::string &input);
 };
 
 #endif // SCALARCONVERTER_HPP

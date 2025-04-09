@@ -6,103 +6,123 @@
 /*   By: crasche <crasche@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/11/07 16:36:52 by crasche       #+#    #+#                 */
-/*   Updated: 2025/01/17 17:17:59 by crasche       ########   odam.nl         */
+/*   Updated: 2025/04/09 20:16:46 by christian.r   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/Bureaucrat.hpp"
+#include "../inc/ScalarConverter.hpp"
 
 int main(void)
 {
 	{
-		std::cout << BOLD << CYAN << "\n\tTest 1 (Construction)"<< RESET << std::endl;
-		Bureaucrat defaultBureaucrat;
-		std::cout << "Announcing: " << defaultBureaucrat << RESET;
-		Bureaucrat nameBureaucrat("NAME");
-		std::cout << "Announcing: " << nameBureaucrat << RESET;
-		Bureaucrat gradeBureaucrat(10);
-		std::cout << "Announcing: " << gradeBureaucrat << RESET;
-		Bureaucrat nameGradeBureaucrat("ME", 55);
-		std::cout << "Announcing: " << nameGradeBureaucrat << RESET;
-		Bureaucrat copyBureaucrat(gradeBureaucrat);
-		std::cout << "Announcing: " << copyBureaucrat << RESET;
-		copyBureaucrat = nameGradeBureaucrat;
-		std::cout << "Announcing: " << copyBureaucrat << RESET;
+		std::cout << BRIGHT_GREEN << BOLD << "\tTesting Special: \n" << RESET;
+		std::cout << BOLD << "\t-inf\n" << RESET;
+		ScalarConverter::convert("-inf");
+		std::cout << BOLD << "\t+inf\n" << RESET;
+		ScalarConverter::convert("+inf");
+		std::cout << BOLD << "\tnan\n" << RESET;
+		ScalarConverter::convert("nan");
+		std::cout << BOLD << "\t-inff\n" << RESET;
+		ScalarConverter::convert("-inff");
+		std::cout << BOLD << "\t+inff\n" << RESET;
+		ScalarConverter::convert("+inff");
+		std::cout << BOLD << "\tnanf\n" << RESET;
+		ScalarConverter::convert("nanf");
+		std::cout << RESET << std::endl;
 	}
 	{
-		std::cout << BOLD << CYAN << "\n\tTest 2 (Exception)"<< RESET << std::endl;
-		try
-		{
-			Bureaucrat gradeTooHighBureaucrat("TOO HIGH", 0);
-		}
-		catch (std::exception &e)
-		{
-			std::cerr << e.what() << std::endl;
-		}
-		try
-		{
-			Bureaucrat gradeTooLowBureaucrat("TOO LOW", 151);
-		}
-		catch (std::exception &e)
-		{
-			std::cerr << e.what() << std::endl;
-		}
+		std::cout << BRIGHT_GREEN << BOLD << "\tTesting Char: \n" << RESET;
+		std::cout << BOLD << "\t'" << "a" << "'\n" << RESET;
+		ScalarConverter::convert("'a'");
+		std::cout << BOLD << "\t'" << "c" << "'\n" << RESET;
+		ScalarConverter::convert("'c'");
+		std::cout << BOLD << "\t'" << "z" << "'\n" << RESET;
+		ScalarConverter::convert("'z'");
+		std::cout << BOLD << "\t'" << "A" << "'\n" << RESET;
+		ScalarConverter::convert("'A'");
+		std::cout << BOLD << "\t'" << "C" << "'\n" << RESET;
+		ScalarConverter::convert("'C'");
+		std::cout << BOLD << "\t'" << "Z" << "'\n" << RESET;
+		ScalarConverter::convert("'Z'");
+		std::cout << BOLD << "\t'" << "0" << "'\n" << RESET;
+		ScalarConverter::convert("'0'");
+		std::cout << BOLD << "\t'" << "1" << "'\n" << RESET;
+		ScalarConverter::convert("'1'");
+		std::cout << BOLD << "\t'" << "9" << "'\n" << RESET;
+		ScalarConverter::convert("'9'");
+		std::cout << BOLD << "\t'" << "!" << "'\n" << RESET;
+		ScalarConverter::convert("'!'");
+		std::cout << BOLD << "\t'" << "@" << "'\n" << RESET;
+		ScalarConverter::convert("'@'");
+		std::cout << BOLD << "\t'" << "#" << "'\n" << RESET;
+		ScalarConverter::convert("'#'");
+		std::cout << BOLD << "\t'" << "$" << "'\n" << RESET;
+		ScalarConverter::convert("'$'");
+		std::cout << std::endl;
 	}
 	{
-		std::cout << BOLD << CYAN << "\n\tTest 3 (increment/decrement)"<< RESET << std::endl;
-		Bureaucrat gradeBureaucrat("SomeGuy", 88);
-		std::cout << "Announcing: " << gradeBureaucrat << RESET;
-		try
-		{
-			gradeBureaucrat.incrementGrade();
-			std::cout << "Announcing: " << gradeBureaucrat << RESET;
-			gradeBureaucrat.decrementGrade();
-			std::cout << "Announcing: " << gradeBureaucrat << RESET;
-			gradeBureaucrat.decrementGrade();
-			std::cout << "Announcing: " << gradeBureaucrat << RESET;
-		}
-		catch (std::exception &e)
-		{
-			std::cerr << e.what() << std::endl;
-		}
+		std::cout << BRIGHT_GREEN << BOLD << "\tTesting Int: \n" << RESET;
+		std::cout << BOLD << "\t42\n" << RESET;
+		ScalarConverter::convert("42");
+		std::cout << BOLD << "\t0\n" << RESET;
+		ScalarConverter::convert("0");
+		std::cout << BOLD << "\t-0\n" << RESET;
+		ScalarConverter::convert("-0");
+		std::cout << BOLD << "\t-1\n" << RESET;
+		ScalarConverter::convert("-1");
+		std::cout << BOLD << "\t2147483647\n" << RESET;
+		ScalarConverter::convert("2147483647");
+		std::cout << BOLD << "\t-2147483648\n" << RESET;
+		ScalarConverter::convert("-2147483648");
+		std::cout << BOLD << "\t2147483648\n" << RESET;
+		ScalarConverter::convert("2147483648");
+		std::cout << BOLD << "\t-2147483649\n" << RESET;
+		ScalarConverter::convert("-2147483649");
+		std::cout << std::endl;
 	}
 	{
-		std::cout << BOLD << CYAN << "\n\tTest 4 (setGrade)"<< RESET << std::endl;
-		Bureaucrat gradeBureaucrat("LameGuy", 66);
-		std::cout << "Announcing: " << gradeBureaucrat << RESET;
-		try
-		{
-			gradeBureaucrat.setGrade(0);
-		}
-		catch (std::exception &e)
-		{
-			std::cerr << e.what() << std::endl;
-		}
-		std::cout << "Announcing: " << gradeBureaucrat << RESET;
-		try
-		{
-			gradeBureaucrat.setGrade(151);
-		}
-		catch (std::exception &e)
-		{
-			std::cerr << e.what() << std::endl;
-		}
-		std::cout << "Announcing: " << gradeBureaucrat << RESET;
-		try
-		{
-			gradeBureaucrat.setGrade(1);
-		}
-		catch (std::exception &e)
-		{
-			std::cerr << e.what() << std::endl;
-		}
-		std::cout << "Announcing: " << gradeBureaucrat << RESET;
+		std::cout << BRIGHT_GREEN << BOLD << "\tTesting Float: \n" << RESET;
+		std::cout << BOLD << "\t42.0f\n" << RESET;
+		ScalarConverter::convert("42.0f");
+		std::cout << BOLD << "\t0.0f\n" << RESET;
+		ScalarConverter::convert("0.0f");
+		std::cout << BOLD << "\t-0.0f\n" << RESET;
+		ScalarConverter::convert("-0.0f");
+		std::cout << BOLD << "\t-1.0f\n" << RESET;
+		ScalarConverter::convert("-1.0f");
+		std::string float_max = std::to_string(std::numeric_limits<float>::max());
+		std::cout << BOLD << "\t" << float_max << "\n" << RESET;
+		ScalarConverter::convert(float_max);
+		std::string float_min = std::to_string(std::numeric_limits<float>::lowest());
+		std::cout << BOLD << "\t" << float_min << "\n" << RESET;
+		ScalarConverter::convert(float_min);
+		std::cout << std::endl;
 	}
 	{
-		std::cout << BOLD << CYAN << "\n\tTest 5 (getters)"<< RESET << std::endl;
-		Bureaucrat gradeBureaucrat("CoolGuy", 1);
-		std::cout << "Announcing: " << gradeBureaucrat << RESET;
-		std::cout << "Name: " << gradeBureaucrat.getName() << std::endl;
-		std::cout << "Grade: " << gradeBureaucrat.getGrade() << std::endl;
+		std::cout << BRIGHT_GREEN << BOLD << "\tTesting Double: \n" << RESET;
+		std::cout << BOLD << "\t0.0\n" << RESET;
+		ScalarConverter::convert("0.0");
+		std::cout << BOLD << "\t-1.0\n"  << RESET;
+		ScalarConverter::convert("-1.0");
+		std::cout << BOLD << "\t42.0\n"  << RESET;
+		ScalarConverter::convert("42.0");
+		std::string double_max = std::to_string(std::numeric_limits<double>::max());
+		std::cout << BOLD << "\t" << double_max << "\n" << RESET;
+		ScalarConverter::convert(double_max);
+		std::string double_min = std::to_string(std::numeric_limits<double>::lowest());
+		std::cout << BOLD << "\t" << double_min << "\n" << RESET;
+		ScalarConverter::convert(double_min);
 	}
+	// {
+	// 	std::string input;
+
+	// 	std::cout << BRIGHT_YELLOW << BOLD << "Enter a value to convert: " << RESET;
+	// 	std::getline(std::cin, input);
+	// 	if (std::cin.eof()) {
+	// 		std::cout << std::endl;
+	// 		return 0;
+	// 	}
+	// 	ScalarConverter::convert(input);
+	// }
+	return (0);
 }
