@@ -6,7 +6,7 @@
 /*   By: crasche <crasche@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/11/07 16:36:52 by crasche       #+#    #+#                 */
-/*   Updated: 2025/04/09 20:23:57 by christian.r   ########   odam.nl         */
+/*   Updated: 2025/04/10 10:42:54 by christian.r   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int main(int argc, char **argv)
 		return (1);
 	}
 	ScalarConverter::convert(argv[1]);
-	// Automatic tests:
+
+//	//	//	//	//	//	// Automatic tests:
 	// {
 	// 	std::cout << BRIGHT_GREEN << BOLD << "\tTesting Special: \n" << RESET;
 	// 	std::cout << BOLD << "\t-inf\n" << RESET;
@@ -97,9 +98,11 @@ int main(int argc, char **argv)
 	// 	std::cout << BOLD << "\t-1.0f\n" << RESET;
 	// 	ScalarConverter::convert("-1.0f");
 	// 	std::string float_max = std::to_string(std::numeric_limits<float>::max());
+	// 	float_max.push_back('f');
 	// 	std::cout << BOLD << "\t" << float_max << "\n" << RESET;
 	// 	ScalarConverter::convert(float_max);
 	// 	std::string float_min = std::to_string(std::numeric_limits<float>::lowest());
+	// 	float_min.push_back('f');
 	// 	std::cout << BOLD << "\t" << float_min << "\n" << RESET;
 	// 	ScalarConverter::convert(float_min);
 	// 	std::cout << std::endl;

@@ -6,7 +6,7 @@
 /*   By: christian.rasche <christian.rasche@stud      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/11/09 14:58:18 by christian.r   #+#    #+#                 */
-/*   Updated: 2025/04/09 20:22:05 by christian.r   ########   odam.nl         */
+/*   Updated: 2025/04/10 10:12:30 by christian.r   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,35 @@ bool	ifSpecial(const std::string &input) {
 		std::cout << "char: impossible" << std::endl;
 		std::cout << "int: impossible" << std::endl;
 		std::cout << "float: " << input << std::endl;
-		std::cout << "double: " << input << std::endl;
+		std::cout << "double: " << doubleInput << std::endl;
 		return (true);
 	}
 	return (false);
+}
+
+void print(char &c, int &i, float &f, double &d, bool overflow[3]) {
+	std::cout << "char: ";
+	if (overflow[0]) {
+		std::cout << "impossible" << std::endl;
+	} else if (std::isprint(c)) {
+		std::cout << "'" << c << "'" << std::endl;
+	} else {
+		std::cout << "Non displayable" << std::endl;
+	}
+	std::cout << "int: ";
+	if (overflow[1]) {
+		std::cout << "impossible" << std::endl;
+	} else {
+		std::cout << i << std::endl;
+	}
+	std::cout << "float: ";
+	if (overflow[2]) {
+		std::cout << "impossible" << std::endl;
+	} else {
+		std::cout << std::fixed << std::setprecision(1) << f << "f" << std::endl;
+	}
+	std::cout << "double: ";
+	std::cout << std::fixed << std::setprecision(1) << d << std::endl;
 }
 
 bool	isChar(const std::string &input) {
@@ -155,6 +180,7 @@ void ScalarConverter::convert(const std::string &input) {
 	
 	int type = getLiteralType(input);
 
+	std::cout << BRIGHT_GREEN << BOLD << "type: " << type << RESET << std::endl;
 	char	c = 0;
 	int		i = 0;
 	float	f = 0.0f;
@@ -171,7 +197,7 @@ void ScalarConverter::convert(const std::string &input) {
 			break;
 		case INT_TYPE:
 			i = std::stoi(input);
-			if (i < std::numeric_limits<char>::lowest() || i > std::numeric_limits<char>::max()) {
+			if (i < std::numeric_limits<char>::min() || i > std::numeric_limits<char>::max()) {
 				c = 0;
 				overflow[0] = true;
 			} else {
@@ -182,13 +208,13 @@ void ScalarConverter::convert(const std::string &input) {
 			break;
 		case FLOAT_TYPE:
 			f = std::stof(input);
-			if (f < std::numeric_limits<char>::lowest() || f > std::numeric_limits<char>::max()) {
+			if (f < std::numeric_limits<char>::min() || f > std::numeric_limits<char>::max()) {
 				c = 0;
 				overflow[0] = true;
 			} else {
 				c = static_cast<char>(f);
 			}
-			if (f < std::numeric_limits<int>::lowest() || f > std::numeric_limits<int>::max()) {
+			if (f < std::numeric_limits<int>::min() || f > std::numeric_limits<int>::max()) {
 				i = 0;
 				overflow[1] = true;
 			} else {
@@ -198,13 +224,13 @@ void ScalarConverter::convert(const std::string &input) {
 			break;
 		case DOUBLE_TYPE:
 			d = std::stod(input);
-			if (d < std::numeric_limits<char>::lowest() || d > std::numeric_limits<char>::max()) {
+			if (d < std::numeric_limits<char>::min() || d > std::numeric_limits<char>::max()) {
 				c = 0;
 				overflow[0] = true;
 			} else {
 				c = static_cast<char>(d);
 			}
-			if (d < std::numeric_limits<int>::lowest() || d > std::numeric_limits<int>::max()) {
+			if (d < std::numeric_limits<int>::min() || d > std::numeric_limits<int>::max()) {
 				i = 0;
 				overflow[1] = true;
 			} else {
@@ -224,29 +250,5 @@ void ScalarConverter::convert(const std::string &input) {
 			std::cerr << BRIGHT_RED << BOLD << "Invalid input" << RESET << std::endl;
 			break;
 	}
-
-
-	std::cout << "char: ";
-	if (overflow[0]) {
-		std::cout << "impossible" << std::endl;
-	} else if (std::isprint(c)) {
-		std::cout << "'" << c << "'" << std::endl;
-	} else {
-		std::cout << "Non displayable" << std::endl;
-	}
-	std::cout << "int: ";
-	if (overflow[1]) {
-		std::cout << "impossible" << std::endl;
-	} else {
-		std::cout << i << std::endl;
-	}
-	std::cout << "float: ";
-	if (overflow[2]) {
-		std::cout << "impossible" << std::endl;
-	} else {
-		std::cout << std::fixed << std::setprecision(1) << f << "f" << std::endl;
-	}
-	std::cout << "double: ";
-	std::cout << std::fixed << std::setprecision(1) << d << std::endl;
-	std::cout << std::endl;
+	print(c, i, f, d, overflow);
 }
