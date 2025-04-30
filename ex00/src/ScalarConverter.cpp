@@ -6,7 +6,7 @@
 /*   By: christian.rasche <christian.rasche@stud      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/11/09 14:58:18 by christian.r   #+#    #+#                 */
-/*   Updated: 2025/04/10 10:12:30 by christian.r   ########   odam.nl         */
+/*   Updated: 2025/04/30 14:10:31 by christian.r   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,7 @@ void ScalarConverter::convert(const std::string &input) {
 	if (ifSpecial(input)) {
 		return ;
 	}
-	
+
 	int type = getLiteralType(input);
 
 	std::cout << BRIGHT_GREEN << BOLD << "type: " << type << RESET << std::endl;
@@ -214,7 +214,7 @@ void ScalarConverter::convert(const std::string &input) {
 			} else {
 				c = static_cast<char>(f);
 			}
-			if (f < std::numeric_limits<int>::min() || f > std::numeric_limits<int>::max()) {
+			if (f < std::numeric_limits<int>::lowest() || std::numeric_limits<int>::max() < f) {
 				i = 0;
 				overflow[1] = true;
 			} else {
