@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ScalarConverter.hpp                                :+:    :+:            */
+/*   Serialization.hpp                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: christian.rasche <christian.rasche@stud      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/11/09 14:58:12 by christian.r   #+#    #+#                 */
-/*   Updated: 2025/04/10 11:24:58 by christian.r   ########   odam.nl         */
+/*   Updated: 2025/04/10 11:31:53 by christian.r   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCALARCONVERTER_HPP
-# define SCALARCONVERTER_HPP
+#ifndef SERIALIZATION_HPP
+# define SERIALIZATION_HPP
 
-# include <cctype>
-# include <iostream>
-# include <iomanip>
+# include <cstdint>
+# include "Data.hpp"
 
 # define RESET          "\033[0m"
 # define BLACK          "\033[30m"
@@ -43,20 +42,15 @@
 # define BOLD           "\033[1m"
 # define UNDERLINE      "\033[4m"
 
-# define CHAR_TYPE		0
-# define INT_TYPE		1
-# define FLOAT_TYPE		2
-# define DOUBLE_TYPE	3
-# define INVALID_TYPE	4
-
-class ScalarConverter{
+class Serialization{
 private:
-	ScalarConverter();
-	~ScalarConverter();
-	ScalarConverter(const ScalarConverter &toCopy);
-	ScalarConverter& operator=(const ScalarConverter &other);
+	Serialization();
+	~Serialization();
+	Serialization(const Serialization &toCopy);
+	Serialization& operator=(const Serialization &other);
 public:
-	static void convert(const std::string &input);
+	static uintptr_t serialize(Data* ptr);
+	static Data* deserialize(uintptr_t raw);
 };
 
-#endif // SCALARCONVERTER_HPP
+#endif // SERIALIZATION_HPP
