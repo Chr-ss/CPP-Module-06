@@ -6,7 +6,7 @@
 /*   By: christian.rasche <christian.rasche@stud      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/11/09 14:58:12 by christian.r   #+#    #+#                 */
-/*   Updated: 2025/04/08 19:24:29 by christian.r   ########   odam.nl         */
+/*   Updated: 2025/04/10 15:30:35 by crasche       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # include <cctype>
 # include <iostream>
 # include <iomanip>
+# include <string>
+# include <limits>
+# include <climits>
 
 # define RESET          "\033[0m"
 # define BLACK          "\033[30m"
