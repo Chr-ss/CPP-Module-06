@@ -6,7 +6,7 @@
 /*   By: christian.rasche <christian.rasche@stud      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/11/09 14:58:18 by christian.r   #+#    #+#                 */
-/*   Updated: 2025/04/10 11:32:35 by christian.r   ########   odam.nl         */
+/*   Updated: 2025/05/15 17:43:23 by crasche       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ Serialization::Serialization(const Serialization &toCopy) {
 
 Serialization& Serialization::operator=(const Serialization &other) {
 	if (this != &other) {
-		// Copy assignment logic here
 	}
 	return *this;
 }

@@ -6,14 +6,15 @@
 /*   By: christian.rasche <christian.rasche@stud      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/11/09 14:58:12 by christian.r   #+#    #+#                 */
-/*   Updated: 2025/04/10 11:31:53 by christian.r   ########   odam.nl         */
+/*   Updated: 2025/05/15 17:54:53 by crasche       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SERIALIZATION_HPP
 # define SERIALIZATION_HPP
 
-# include <cstdint>
+# include <iostream>
+# include <stdint.h>
 # include "Data.hpp"
 
 # define RESET          "\033[0m"

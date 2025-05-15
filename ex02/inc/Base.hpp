@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ScalarConverter.hpp                                :+:    :+:            */
+/*   Base.hpp                                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: christian.rasche <christian.rasche@stud      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/11/09 14:58:12 by christian.r   #+#    #+#                 */
-/*   Updated: 2025/05/13 13:51:31 by crasche       ########   odam.nl         */
+/*   Updated: 2025/05/15 18:09:58 by crasche       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCALARCONVERTER_HPP
-# define SCALARCONVERTER_HPP
+#ifndef BASE_HPP
+# define BASE_HPP
 
-# include <cctype>
 # include <iostream>
-# include <iomanip>
-# include <string>
-# include <limits>
-# include <climits>
 
 # define RESET          "\033[0m"
 # define BLACK          "\033[30m"
@@ -46,20 +41,18 @@
 # define BOLD           "\033[1m"
 # define UNDERLINE      "\033[4m"
 
-# define CHAR_TYPE		0
-# define INT_TYPE		1
-# define FLOAT_TYPE		2
-# define DOUBLE_TYPE	3
-# define INVALID_TYPE	4
-
-class ScalarConverter{
+class Base{
 private:
-	ScalarConverter();
-	~ScalarConverter();
-	ScalarConverter(const ScalarConverter &toCopy);
-	ScalarConverter& operator=(const ScalarConverter &other);
 public:
-	static void convert(std::string input);
+	virtual ~Base() {}
 };
 
-#endif // SCALARCONVERTER_HPP
+class A : public Base {};
+class B : public Base {};
+class C : public Base {};
+
+Base* generate(void);
+void identify(Base* p);
+void identify(Base& p);
+
+#endif // BASE_HPP

@@ -6,7 +6,7 @@
 /*   By: christian.rasche <christian.rasche@stud      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/11/09 14:58:18 by christian.r   #+#    #+#                 */
-/*   Updated: 2025/04/30 14:10:31 by christian.r   ########   odam.nl         */
+/*   Updated: 2025/05/13 15:08:29 by crasche       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,27 +45,27 @@ bool	ifSpecial(const std::string &input) {
 }
 
 void print(char &c, int &i, float &f, double &d, bool overflow[3]) {
-	std::cout << "char: ";
+	std::cout << "char:\t";
 	if (overflow[0]) {
 		std::cout << "impossible" << std::endl;
 	} else if (std::isprint(c)) {
-		std::cout << "'" << c << "'" << std::endl;
+		std::cout << "’" << c << "’" << std::endl;
 	} else {
 		std::cout << "Non displayable" << std::endl;
 	}
-	std::cout << "int: ";
+	std::cout << "int:\t";
 	if (overflow[1]) {
 		std::cout << "impossible" << std::endl;
 	} else {
 		std::cout << i << std::endl;
 	}
-	std::cout << "float: ";
+	std::cout << "float:\t";
 	if (overflow[2]) {
 		std::cout << "impossible" << std::endl;
 	} else {
 		std::cout << std::fixed << std::setprecision(1) << f << "f" << std::endl;
 	}
-	std::cout << "double: ";
+	std::cout << "double:\t";
 	std::cout << std::fixed << std::setprecision(1) << d << std::endl;
 }
 
@@ -173,21 +173,17 @@ int	getLiteralType(const std::string &input) {
 }
 
 
-void ScalarConverter::convert(const std::string &input) {
+void ScalarConverter::convert(std::string input) {
 	if (ifSpecial(input)) {
 		return ;
 	}
-
 	int type = getLiteralType(input);
-
-	std::cout << BRIGHT_GREEN << BOLD << "type: " << type << RESET << std::endl;
+	// std::cout << BRIGHT_GREEN << BOLD << "type: " << type << RESET << std::endl;
 	char	c = 0;
 	int		i = 0;
 	float	f = 0.0f;
 	double	d = 0.0;
-
 	bool	overflow[3] = {false, false, false};
-
 	switch (type) {
 		case CHAR_TYPE:
 			c = input.at(1);
@@ -197,7 +193,7 @@ void ScalarConverter::convert(const std::string &input) {
 			break;
 		case INT_TYPE:
 			i = std::stoi(input);
-			if (i < std::numeric_limits<char>::min() || i > std::numeric_limits<char>::max()) {
+			if (i < std::numeric_limits<char>::lowest() || i > std::numeric_limits<char>::max()) {
 				c = 0;
 				overflow[0] = true;
 			} else {
@@ -207,14 +203,17 @@ void ScalarConverter::convert(const std::string &input) {
 			d = static_cast<double>(i);
 			break;
 		case FLOAT_TYPE:
+			std::cout << "input: " << input << std::endl;
+			input.erase(input.length() - 1);
 			f = std::stof(input);
-			if (f < std::numeric_limits<char>::min() || f > std::numeric_limits<char>::max()) {
+			std::cout << "f: " << f << std::endl;
+			if (f < std::numeric_limits<char>::lowest() || f > std::numeric_limits<char>::max()) {
 				c = 0;
 				overflow[0] = true;
 			} else {
 				c = static_cast<char>(f);
 			}
-			if (f < std::numeric_limits<int>::lowest() || std::numeric_limits<int>::max() < f) {
+			if (f < static_cast<float>(std::numeric_limits<int>::lowest()) || static_cast<float>(std::numeric_limits<int>::max()) <= f) {
 				i = 0;
 				overflow[1] = true;
 			} else {
@@ -224,13 +223,13 @@ void ScalarConverter::convert(const std::string &input) {
 			break;
 		case DOUBLE_TYPE:
 			d = std::stod(input);
-			if (d < std::numeric_limits<char>::min() || d > std::numeric_limits<char>::max()) {
+			if (d < std::numeric_limits<char>::lowest() || d > std::numeric_limits<char>::max()) {
 				c = 0;
 				overflow[0] = true;
 			} else {
 				c = static_cast<char>(d);
 			}
-			if (d < std::numeric_limits<int>::min() || d > std::numeric_limits<int>::max()) {
+			if (d < std::numeric_limits<int>::lowest() || d > std::numeric_limits<int>::max()) {
 				i = 0;
 				overflow[1] = true;
 			} else {
